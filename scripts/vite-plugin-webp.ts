@@ -1,0 +1,80 @@
+import type { Plugin } from 'vite';
+import path from 'node:path';
+import fs from 'node:fs';
+import sharp from 'sharp';
+
+export interface WebpPluginOptions {
+  staticDir?: string;
+  quality?: number;
+  effort?: number;
+}
+
+export function autoWebpPlugin(options: WebpPluginOptions = {}): Plugin {
+  const quality = options.quality ?? 85;
+  const effort = options.effort ?? 6;
+
+  async function processFile(filePath: string) {
+    const ext = path.extname(filePath).toLowerCase();
+    if (!['.png', '.jpg', '.jpeg'].includes(ext)) return;
+
+    const webpPath = path.join(path.dirname(filePath), `${path.basename(filePath, ext)}.webp`);
+
+    try {
+      if (fs.existsSync(webpPath)) {
+        const srcStat = fs.statSync(filePath);
+        const webpStat = fs.statSync(webpPath);
+        // If webp is newer than source, skip
+        if (webpStat.mtimeMs >= srcStat.mtimeMs) return;
+      }
+
+      const inStat = fs.statSync(filePath);
+      await sharp(filePath)
+        .webp({ quality, effort, alphaQuality: 90 })
+        .toFile(webpPath);
+      const outStat = fs.statSync(webpPath);
+      const saving = ((1 - outStat.size / inStat.size) * 100).toFixed(1);
+      console.log(`[auto-webp] Converted ${path.basename(filePath)} (${(inStat.size / 1024).toFixed(1)} KB) -> ${path.basename(webpPath)} (${(outStat.size / 1024).toFixed(1)} KB) [ -${saving}% ]`);
+    } catch (err) {
+      console.error(`[auto-webp] Failed to convert ${filePath}:`, err);
+    }
+  }
+
+  async function scanDirectory(dir: string) {
+    if (!fs.existsSync(dir)) return;
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+    for (const entry of entries) {
+      const fullPath = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        await scanDirectory(fullPath);
+      } else {
+        await processFile(fullPath);
+      }
+    }
+  }
+
+  return {
+    name: 'vite-plugin-auto-webp',
+    async buildStart() {
+      const staticDir = options.staticDir || path.resolve(process.cwd(), 'static');
+      await scanDirectory(staticDir);
+    },
+    configureServer(server) {
+      const staticDir = options.staticDir || path.resolve(process.cwd(), 'static');
+      scanDirectory(staticDir);
+
+      server.watcher.on('add', (filePath) => {
+        if (filePath.startsWith(staticDir)) {
+          processFile(filePath);
+        }
+      });
+      server.watcher.on('change', (filePath) => {
+        if (filePath.startsWith(staticDir)) {
+          processFile(filePath);
+        }
+      });
+    }
+  };
+}
+
+export default autoWebpPlugin;
+

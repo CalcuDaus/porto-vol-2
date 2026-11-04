@@ -1,0 +1,324 @@
+{
+  "width": 1366,
+  "height": 768,
+  "layers": [
+    {
+      "name": "Artboard 1",
+      "kind": "artboard",
+      "visible": true,
+      "opacity": 255,
+      "bbox": [
+        0,
+        0,
+        1366,
+        768
+      ],
+      "width": 1366,
+      "height": 768,
+      "depth": 0,
+      "children": [
+        {
+          "name": "Layer 1",
+          "kind": "pixel",
+          "visible": true,
+          "opacity": 255,
+          "bbox": [
+            193,
+            69,
+            1155,
+            714
+          ],
+          "width": 962,
+          "height": 645,
+          "depth": 1
+        },
+        {
+          "name": "Layer 4",
+          "kind": "pixel",
+          "visible": true,
+          "opacity": 255,
+          "bbox": [
+            281,
+            172,
+            721,
+            612
+          ],
+          "width": 440,
+          "height": 440,
+          "depth": 1,
+          "asset_file": "layer_1_Layer_4_440x440.png"
+        },
+        {
+          "name": "Layer 4 copy",
+          "kind": "pixel",
+          "visible": true,
+          "opacity": 255,
+          "bbox": [
+            775,
+            402,
+            1087,
+            714
+          ],
+          "width": 312,
+          "height": 312,
+          "depth": 1,
+          "asset_file": "layer_1_Layer_4_copy_312x312.png"
+        },
+        {
+          "name": "Layer 4 copy 2",
+          "kind": "pixel",
+          "visible": true,
+          "opacity": 255,
+          "bbox": [
+            663,
+            -129,
+            1219,
+            427
+          ],
+          "width": 556,
+          "height": 556,
+          "depth": 1,
+          "asset_file": "layer_1_Layer_4_copy_2_556x556.png"
+        },
+        {
+          "name": "Layer 2",
+          "kind": "pixel",
+          "visible": true,
+          "opacity": 230,
+          "bbox": [
+            574,
+            242,
+            752,
+            452
+          ],
+          "width": 178,
+          "height": 210,
+          "depth": 1,
+          "asset_file": "layer_1_Layer_2_178x210.png"
+        },
+        {
+          "name": "Projects",
+          "kind": "type",
+          "visible": true,
+          "opacity": 255,
+          "bbox": [
+            260,
+            138,
+            360,
+            161
+          ],
+          "width": 100,
+          "height": 23,
+          "depth": 1,
+          "text": "Projects",
+          "asset_file": "layer_1_Projects_100x23.png"
+        },
+        {
+          "name": "Skills",
+          "kind": "type",
+          "visible": true,
+          "opacity": 255,
+          "bbox": [
+            260,
+            613,
+            327,
+            631
+          ],
+          "width": 67,
+          "height": 18,
+          "depth": 1,
+          "text": "Skills"
+        },
+        {
+          "name": "Achivements",
+          "kind": "type",
+          "visible": true,
+          "opacity": 255,
+          "bbox": [
+            926,
+            138,
+            1087,
+            156
+          ],
+          "width": 161,
+          "height": 18,
+          "depth": 1,
+          "text": "Achivements"
+        },
+        {
+          "name": "Hue/Saturation 2",
+          "kind": "huesaturation",
+          "visible": true,
+          "opacity": 255,
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "width": 0,
+          "height": 0,
+          "depth": 1
+        },
+        {
+          "name": "Vibrance 1",
+          "kind": "vibrance",
+          "visible": true,
+          "opacity": 255,
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "width": 0,
+          "height": 0,
+          "depth": 1
+        },
+        {
+          "name": "Brightness/Contrast 1",
+          "kind": "brightnesscontrast",
+          "visible": true,
+          "opacity": 255,
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "width": 0,
+          "height": 0,
+          "depth": 1
+        },
+        {
+          "name": "Hue/Saturation 1",
+          "kind": "huesaturation",
+          "visible": true,
+          "opacity": 255,
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "width": 0,
+          "height": 0,
+          "depth": 1
+        },
+        {
+          "name": "Mhd Firdaus",
+          "kind": "type",
+          "visible": true,
+          "opacity": 194,
+          "bbox": [
+            500,
+            404,
+            849,
+            447
+          ],
+          "width": 349,
+          "height": 43,
+          "depth": 1,
+          "text": "Mhd Firdaus",
+          "asset_file": "layer_1_Mhd_Firdaus_349x43.png"
+        },
+        {
+          "name": "Layer 3",
+          "kind": "pixel",
+          "visible": true,
+          "opacity": 255,
+          "bbox": [
+            1076,
+            613,
+            1125,
+            663
+          ],
+          "width": 49,
+          "height": 50,
+          "depth": 1,
+          "asset_file": "layer_1_Layer_3_49x50.png"
+        },
+        {
+          "name": "Software Engineer",
+          "kind": "type",
+          "visible": true,
+          "opacity": 194,
+          "bbox": [
+            530,
+            460,
+            817,
+            490
+          ],
+          "width": 287,
+          "height": 30,
+          "depth": 1,
+          "text": "Software Engineer",
+          "asset_file": "layer_1_Software_Engineer_287x30.png"
+        },
+        {
+          "name": "github",
+          "kind": "pixel",
+          "visible": true,
+          "opacity": 255,
+          "bbox": [
+            1026,
+            631,
+            1051,
+            656
+          ],
+          "width": 25,
+          "height": 25,
+          "depth": 1,
+          "asset_file": "layer_1_github_25x25.png"
+        },
+        {
+          "name": "linkedin",
+          "kind": "pixel",
+          "visible": true,
+          "opacity": 255,
+          "bbox": [
+            1086,
+            572,
+            1111,
+            597
+          ],
+          "width": 25,
+          "height": 25,
+          "depth": 1,
+          "asset_file": "layer_1_linkedin_25x25.png"
+        },
+        {
+          "name": "logo ig",
+          "kind": "pixel",
+          "visible": true,
+          "opacity": 255,
+          "bbox": [
+            1051,
+            597,
+            1076,
+            622
+          ],
+          "width": 25,
+          "height": 25,
+          "depth": 1,
+          "asset_file": "layer_1_logo_ig_25x25.png"
+        },
+        {
+          "name": "WhatsApp Image 2026-11-01 at 1.08.44 AM",
+          "kind": "pixel",
+          "visible": false,
+          "opacity": 255,
+          "bbox": [
+            506,
+            -284,
+            1224,
+            673
+          ],
+          "width": 718,
+          "height": 957,
+          "depth": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "porto-vol-2",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "bun --filter \"*\" --parallel dev",
+    "dev:web": "bun --filter web dev",
+    "dev:admin": "bun --filter admin dev",
+    "dev:api": "bun --filter api dev",
+    "build": "bun run optimize:images && bun --filter \"*\" build",
+    "optimize:images": "bun scripts/convert-webp.ts",
+    "check": "bun --filter web check && bun --filter admin check"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5",
+    "vite": "^8.3.0"
+  }
+}

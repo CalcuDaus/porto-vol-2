@@ -1,0 +1,56 @@
+@import 'tailwindcss';
+
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #0b0f15;
+    color: #ebebeb;
+    font-family: 'Kalam', Georgia, serif;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+}
+
+/* Authentic Chalk Text Shadow */
+.chalk-shadow {
+  text-shadow: 
+    0 0 1px rgba(255, 255, 255, 0.9),
+    0 0 3px rgba(255, 255, 255, 0.6),
+    0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.chalk-glow {
+  text-shadow: 
+    0 0 2px rgba(255, 255, 255, 1),
+    0 0 6px rgba(255, 255, 255, 0.9),
+    0 0 14px rgba(255, 255, 255, 0.6),
+    0 0 22px rgba(255, 255, 255, 0.3);
+}
+
+/* Subtle chalk dust noise */
+.chalk-board-texture {
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.02) 0%, transparent 80%),
+    url('/board/texture.webp');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Custom scrollbar for full-screen board modal */
+.chalk-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.chalk-scroll::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+.chalk-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+}
+.chalk-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.45);
+}
