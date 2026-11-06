@@ -6,6 +6,8 @@
 - **Low cohesion detected in Domain Cluster 5**: Cluster 5 (11 nodes) has a very low cohesion score (0.09). This suggests the community is a "spaghetti" module containing unrelated logic that should be separated into cleaner domain boundaries.
 
 ### 📐 Config/Infrastructure Conventions & Fixes
+- **[what-changed] 🟢 Edited apps/api/.env (17 changes, 19min)**: Active editing session on apps/api/.env.
+17 content changes over 19 minutes.
 - **[discovery] 15 potentially unused files detected**: These files are not imported by any other file in the codebase and may be dead code:
   • api.ts
   • fonts.ts

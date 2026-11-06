@@ -1,7 +1,7 @@
 
 
 # Project Memory — porto-vol-2
-> 30 notes | Score threshold: >40
+> 38 notes | Score threshold: >40
 
 ## Safety — Never Run Destructive Commands
 
@@ -18,7 +18,7 @@
 
 **Stack:** JavaScript/TypeScript · Tailwind
 
-## 📝 NOTE: 1 uncommitted file(s) in working tree.\n\n## Project Standards
+## Project Standards
 
 - 12 potentially unused files detected — confirmed 3x
 - convention in .gitignore

@@ -1,7 +1,7 @@
 
 
 # Project Memory — porto-vol-2
-> 30 notes | Score threshold: >40
+> 38 notes | Score threshold: >40
 
 ## Safety — Never Run Destructive Commands
 
