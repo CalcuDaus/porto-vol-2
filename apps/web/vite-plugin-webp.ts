@@ -1,12 +1,28 @@
 import type { Plugin, ViteDevServer } from 'vite';
 import path from 'node:path';
 import fs from 'node:fs';
-import sharp from 'sharp';
 
 export interface WebpPluginOptions {
   staticDir?: string;
   quality?: number;
   effort?: number;
+}
+
+let sharpModule: any = null;
+let sharpChecked = false;
+
+async function getSharp() {
+  if (sharpChecked) return sharpModule;
+  sharpChecked = true;
+  try {
+    // Dynamic import to prevent crash when sharp is not installed (e.g., CI/Vercel)
+    const mod = await import('sharp');
+    sharpModule = mod.default || mod;
+    return sharpModule;
+  } catch {
+    sharpModule = null;
+    return null;
+  }
 }
 
 export function autoWebpPlugin(options: WebpPluginOptions = {}): Plugin {
@@ -27,8 +43,13 @@ export function autoWebpPlugin(options: WebpPluginOptions = {}): Plugin {
         if (webpStat.mtimeMs >= srcStat.mtimeMs) return;
       }
 
+      const sharpInstance = await getSharp();
+      if (!sharpInstance) {
+        return;
+      }
+
       const inStat = fs.statSync(filePath);
-      await sharp(filePath)
+      await sharpInstance(filePath)
         .webp({ quality, effort, alphaQuality: 90 })
         .toFile(webpPath);
       const outStat = fs.statSync(webpPath);
@@ -55,6 +76,13 @@ export function autoWebpPlugin(options: WebpPluginOptions = {}): Plugin {
   return {
     name: 'vite-plugin-auto-webp',
     async buildStart() {
+      // In production or on Vercel, pre-converted webp images are already committed
+      if (process.env.NODE_ENV === 'production' || process.env.VERCEL) {
+        return;
+      }
+      const sharpInstance = await getSharp();
+      if (!sharpInstance) return;
+
       const staticDir = options.staticDir || path.resolve(process.cwd(), 'static');
       await scanDirectory(staticDir);
     },
@@ -77,4 +105,3 @@ export function autoWebpPlugin(options: WebpPluginOptions = {}): Plugin {
 }
 
 export default autoWebpPlugin;
-
