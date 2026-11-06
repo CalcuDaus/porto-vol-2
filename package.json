@@ -16,7 +16,6 @@
     "check": "bun --filter web check && bun --filter admin check"
   },
   "devDependencies": {
-    "sharp": "^0.35.5",
-    "vite": "^8.3.0"
+    "sharp": "^0.35.5"
   }
 }
