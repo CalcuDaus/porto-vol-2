@@ -597,6 +597,64 @@
       .filter((i) => i.length > 0);
   }
 
+  // --- Skill Drag & Drop & Reordering Helpers ---
+  let draggedSkillIndex = $state<number | null>(null);
+  let dragOverSkillIndex = $state<number | null>(null);
+
+  function handleSkillDragStart(e: DragEvent, index: number) {
+    draggedSkillIndex = index;
+    if (e.dataTransfer) {
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', String(index));
+    }
+  }
+
+  function handleSkillDragOver(e: DragEvent, index: number) {
+    e.preventDefault();
+    if (e.dataTransfer) {
+      e.dataTransfer.dropEffect = 'move';
+    }
+    if (dragOverSkillIndex !== index) {
+      dragOverSkillIndex = index;
+    }
+  }
+
+  function handleSkillDragLeave() {
+    // leave callback
+  }
+
+  function handleSkillDrop(e: DragEvent, targetIndex: number) {
+    e.preventDefault();
+    if (draggedSkillIndex === null || draggedSkillIndex === targetIndex) {
+      handleSkillDragEnd();
+      return;
+    }
+
+    const items = [...content.skills];
+    const [movedItem] = items.splice(draggedSkillIndex, 1);
+    items.splice(targetIndex, 0, movedItem);
+    content.skills = items;
+
+    const fromPos = draggedSkillIndex + 1;
+    const toPos = targetIndex + 1;
+    handleSkillDragEnd();
+    showToast('success', `Urutan kategori keahlian dipindah dari #${fromPos} ke #${toPos}`);
+  }
+
+  function handleSkillDragEnd() {
+    draggedSkillIndex = null;
+    dragOverSkillIndex = null;
+  }
+
+  function moveSkillGroup(fromIndex: number, toIndex: number) {
+    if (toIndex < 0 || toIndex >= content.skills.length) return;
+    const items = [...content.skills];
+    const [movedItem] = items.splice(fromIndex, 1);
+    items.splice(toIndex, 0, movedItem);
+    content.skills = items;
+    showToast('success', `Urutan kategori keahlian dipindah ke posisi #${toIndex + 1}`);
+  }
+
   // Computed styles for live preview
   const previewTitleStack = $derived(getFontStack(content.appearance.titleFont));
   const previewNavStack = $derived(getFontStack(content.appearance.navFont));
@@ -2351,19 +2409,66 @@
                 {/if}
 
                 {#each content.skills as group, idx (group.id)}
-                  <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 space-y-3">
-                    <div class="flex items-center justify-between">
-                      <span class="text-xs font-mono text-teal-400 font-semibold">
-                        Kelompok #{idx + 1}
-                      </span>
-                      <button
-                        type="button"
-                        onclick={() => removeSkillGroup(group.id)}
-                        class="text-xs text-rose-400 hover:text-rose-300 hover:bg-rose-950/40 p-1.5 rounded-lg transition"
-                        title="Hapus kategori"
-                      >
-                        <Trash2 class="w-4 h-4" />
-                      </button>
+                  <div
+                    role="listitem"
+                    class="bg-slate-900/60 border rounded-xl p-5 space-y-3 transition-all duration-150 {draggedSkillIndex === idx ? 'opacity-40 border-dashed border-teal-500/80 scale-[0.99]' : dragOverSkillIndex === idx ? 'border-teal-400 shadow-[0_0_15px_rgba(20,184,166,0.25)] bg-slate-800/80' : 'border-slate-800'}"
+                    ondragover={(e) => handleSkillDragOver(e, idx)}
+                    ondragleave={handleSkillDragLeave}
+                    ondrop={(e) => handleSkillDrop(e, idx)}
+                  >
+                    <div
+                      role="toolbar"
+                      tabindex="0"
+                      class="flex items-center justify-between pb-3 border-b border-slate-800/60 cursor-grab active:cursor-grabbing select-none"
+                      draggable="true"
+                      ondragstart={(e) => handleSkillDragStart(e, idx)}
+                      ondragend={handleSkillDragEnd}
+                      title="Klik & seret untuk memindahkan urutan posisi kategori"
+                    >
+                      <div class="flex items-center gap-2">
+                        <div class="text-slate-500 hover:text-teal-400 p-1 rounded transition" title="Seret untuk memindahkan urutan">
+                          <GripVertical class="w-4 h-4" />
+                        </div>
+
+                        <div class="flex items-center gap-0.5">
+                          <button
+                            type="button"
+                            onclick={(e) => { e.stopPropagation(); moveSkillGroup(idx, idx - 1); }}
+                            disabled={idx === 0}
+                            class="p-1 rounded text-slate-500 hover:text-white disabled:opacity-20 disabled:hover:text-slate-500 transition cursor-pointer"
+                            title="Pindah ke atas"
+                          >
+                            <ArrowUp class="w-3.5 h-3.5" />
+                          </button>
+                          <button
+                            type="button"
+                            onclick={(e) => { e.stopPropagation(); moveSkillGroup(idx, idx + 1); }}
+                            disabled={idx === content.skills.length - 1}
+                            class="p-1 rounded text-slate-500 hover:text-white disabled:opacity-20 disabled:hover:text-slate-500 transition cursor-pointer"
+                            title="Pindah ke bawah"
+                          >
+                            <ArrowDown class="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+
+                        <span class="text-xs font-mono text-teal-400 font-semibold ml-1">
+                          Kelompok #{idx + 1} — {group.category || 'Tanpa Kategori'}
+                        </span>
+                      </div>
+
+                      <div class="flex items-center gap-2">
+                        <span class="text-[10px] text-slate-500 font-mono hidden sm:inline-block">
+                          Tarik bar ini untuk geser posisi
+                        </span>
+                        <button
+                          type="button"
+                          onclick={(e) => { e.stopPropagation(); removeSkillGroup(group.id); }}
+                          class="text-xs text-rose-400 hover:text-rose-300 hover:bg-rose-950/40 p-1.5 rounded-lg transition"
+                          title="Hapus kategori"
+                        >
+                          <Trash2 class="w-4 h-4" />
+                        </button>
+                      </div>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -3026,8 +3131,8 @@
                     {content.intros.projects}
                   </p>
                 </div>
-                <div class="space-y-1.5 max-h-[160px] overflow-hidden">
-                  {#each content.projects.filter(p => !p.isDeleted).slice(0, 3) as proj}
+                <div class="space-y-1.5 max-h-[220px] overflow-y-auto pr-1 [scrollbar-width:thin] [scrollbar-color:rgba(255,255,255,0.25)_transparent]">
+                  {#each content.projects.filter(p => !p.isDeleted) as proj}
                     <div class="bg-black/25 border border-white/15 rounded p-2 text-left">
                       <div class="text-[11px] font-bold text-white" style="font-family: {previewNavStack}; color: {chalkColor};">
                         {proj.title}
@@ -3036,7 +3141,7 @@
                         {proj.description}
                       </p>
                       <div class="flex gap-1 mt-1 flex-wrap">
-                        {#each proj.tags.slice(0, 3) as tag}
+                        {#each proj.tags as tag}
                           <span class="text-[8px] px-1 py-0.2 rounded bg-white/10 text-white/90">
                             {tag}
                           </span>
@@ -3056,8 +3161,8 @@
                     {content.intros.achievements}
                   </p>
                 </div>
-                <div class="space-y-1.5 max-h-[160px] overflow-hidden">
-                  {#each content.achievements.filter(a => !a.isDeleted).slice(0, 3) as ach}
+                <div class="space-y-1.5 max-h-[220px] overflow-y-auto pr-1 [scrollbar-width:thin] [scrollbar-color:rgba(255,255,255,0.25)_transparent]">
+                  {#each content.achievements.filter(a => !a.isDeleted) as ach}
                     <div class="bg-black/25 border border-white/15 rounded p-2 text-left">
                       <div class="text-[11px] font-bold text-white" style="font-family: {previewNavStack}; color: {chalkColor};">
                         {ach.title}
@@ -3077,14 +3182,14 @@
                     {content.intros.skills}
                   </p>
                 </div>
-                <div class="space-y-2 max-h-[160px] overflow-hidden">
-                  {#each content.skills.filter(s => !s.isDeleted).slice(0, 2) as grp}
+                <div class="space-y-2.5 max-h-[220px] overflow-y-auto pr-1 [scrollbar-width:thin] [scrollbar-color:rgba(255,255,255,0.25)_transparent]">
+                  {#each content.skills.filter(s => !s.isDeleted) as grp}
                     <div>
                       <div class="text-[10px] font-bold text-white/90 mb-1" style="font-family: {previewNavStack};">
                         {grp.category}
                       </div>
                       <div class="flex gap-1 flex-wrap">
-                        {#each grp.items.slice(0, 5) as item}
+                        {#each grp.items as item}
                           <span class="text-[8px] px-1.5 py-0.5 rounded border border-white/20 bg-white/5 text-white">
                             {item}
                           </span>

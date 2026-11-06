@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const cwd = process.cwd();
@@ -14,9 +14,34 @@ const tsContent = `import type { SiteContent } from '../types';\n\nexport const 
 writeFileSync(tsPath, tsContent, 'utf-8');
 console.log('✅ Synchronized content.json to defaultContent.ts!');
 
-// Read Supabase credentials from environment if available
-const supabaseUrl = process.env.PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
-const supabaseKey = process.env.PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY;
+// Read Supabase credentials from environment or .env files if available
+let supabaseUrl = process.env.PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
+let supabaseKey = process.env.PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY;
+
+if (!supabaseUrl || !supabaseKey) {
+  const envPaths = [
+    resolve(cwd, 'apps', 'web', '.env'),
+    resolve(cwd, 'apps', 'api', '.env'),
+    resolve(cwd, '.env')
+  ];
+  for (const envPath of envPaths) {
+    if (existsSync(envPath)) {
+      const envText = readFileSync(envPath, 'utf-8');
+      for (const line of envText.split('\n')) {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith('#')) continue;
+        const [k, ...v] = trimmed.split('=');
+        const val = v.join('=').trim().replace(/^["']|["']$/g, '');
+        if ((k === 'PUBLIC_SUPABASE_URL' || k === 'SUPABASE_URL') && !supabaseUrl) {
+          supabaseUrl = val;
+        }
+        if ((k === 'PUBLIC_SUPABASE_ANON_KEY' || k === 'SUPABASE_ANON_KEY') && !supabaseKey) {
+          supabaseKey = val;
+        }
+      }
+    }
+  }
+}
 
 if (supabaseUrl && supabaseKey) {
   try {

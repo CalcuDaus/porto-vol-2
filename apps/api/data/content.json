@@ -92,11 +92,11 @@
   ],
   "achievements": [
     {
-      "id": "ach-1",
-      "title": "Full-Stack Software Engineering Excellence",
-      "issuer": "Technical Certification",
-      "year": "2025",
-      "description": "Mastery in building modern reactive applications using Svelte, Bun, TypeScript, and microservice APIs.",
+      "id": "ach-3",
+      "title": "1st Winner in Web Technologies",
+      "issuer": "Puspernas",
+      "year": "2023",
+      "description": "Create a Full Stack App with Native PHP, Mysql, HTML, and CSS ",
       "isDeleted": false
     },
     {
@@ -108,11 +108,11 @@
       "isDeleted": false
     },
     {
-      "id": "ach-3",
-      "title": "1st Winner in Web Technologies",
-      "issuer": "Puspernas",
-      "year": "2023",
-      "description": "Create a Full Stack App with Native PHP, Mysql, HTML, and CSS ",
+      "id": "ach-1",
+      "title": "Full-Stack Software Engineering Excellence",
+      "issuer": "Technical Certification",
+      "year": "2025",
+      "description": "Mastery in building modern reactive applications using Svelte, Bun, TypeScript, and microservice APIs.",
       "isDeleted": false
     }
   ],
@@ -170,8 +170,8 @@
   "contact": {
     "heading": "Get in Touch",
     "description": "Feel free to reach out for collaborations, questions, or project inquiries.",
-    "email": "mhdfirdaus@example.com",
+    "email": "mhdfirdaus.business@gmail.com",
     "formEnabled": true
   },
-  "updatedAt": "2026-11-06T16:14:58.830Z"
+  "updatedAt": "2026-11-06T17:13:31.800Z"
 }

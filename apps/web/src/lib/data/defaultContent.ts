@@ -172,8 +172,8 @@ export const defaultContent: SiteContent = {
   "contact": {
     "heading": "Get in Touch",
     "description": "Feel free to reach out for collaborations, questions, or project inquiries.",
-    "email": "mhdfirdaus@example.com",
+    "email": "mhdfirdaus.business@gmail.com",
     "formEnabled": true
   },
-  "updatedAt": "2026-11-06T16:14:58.830Z"
+  "updatedAt": "2026-11-06T17:08:25.212Z"
 };
