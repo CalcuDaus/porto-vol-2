@@ -42,7 +42,8 @@
     FileText,
     Upload,
     CloudRain,
-    Binary
+    Binary,
+    GripVertical
   } from '@lucide/svelte';
 
   // Authentication State
@@ -514,6 +515,64 @@
 
   function removeAchievement(id: string) {
     content.achievements = content.achievements.filter((a) => a.id !== id);
+  }
+
+  // --- Achievement Drag & Drop & Reordering Helpers ---
+  let draggedAchIndex = $state<number | null>(null);
+  let dragOverAchIndex = $state<number | null>(null);
+
+  function handleAchDragStart(e: DragEvent, index: number) {
+    draggedAchIndex = index;
+    if (e.dataTransfer) {
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', String(index));
+    }
+  }
+
+  function handleAchDragOver(e: DragEvent, index: number) {
+    e.preventDefault();
+    if (e.dataTransfer) {
+      e.dataTransfer.dropEffect = 'move';
+    }
+    if (dragOverAchIndex !== index) {
+      dragOverAchIndex = index;
+    }
+  }
+
+  function handleAchDragLeave() {
+    // leave callback
+  }
+
+  function handleAchDrop(e: DragEvent, targetIndex: number) {
+    e.preventDefault();
+    if (draggedAchIndex === null || draggedAchIndex === targetIndex) {
+      handleAchDragEnd();
+      return;
+    }
+
+    const items = [...content.achievements];
+    const [movedItem] = items.splice(draggedAchIndex, 1);
+    items.splice(targetIndex, 0, movedItem);
+    content.achievements = items;
+
+    const fromPos = draggedAchIndex + 1;
+    const toPos = targetIndex + 1;
+    handleAchDragEnd();
+    showToast('success', `Urutan prestasi dipindah dari #${fromPos} ke #${toPos}`);
+  }
+
+  function handleAchDragEnd() {
+    draggedAchIndex = null;
+    dragOverAchIndex = null;
+  }
+
+  function moveAchievement(fromIndex: number, toIndex: number) {
+    if (toIndex < 0 || toIndex >= content.achievements.length) return;
+    const items = [...content.achievements];
+    const [movedItem] = items.splice(fromIndex, 1);
+    items.splice(toIndex, 0, movedItem);
+    content.achievements = items;
+    showToast('success', `Urutan prestasi dipindah ke posisi #${toIndex + 1}`);
   }
 
   // --- Skill Helpers ---
@@ -2129,19 +2188,66 @@
                 {/if}
 
                 {#each content.achievements as ach, idx (ach.id)}
-                  <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 space-y-4">
-                    <div class="flex items-center justify-between">
-                      <span class="text-xs font-mono text-yellow-400 font-semibold">
-                        #{idx + 1} — {ach.title || 'Tanpa Judul'}
-                      </span>
-                      <button
-                        type="button"
-                        onclick={() => removeAchievement(ach.id)}
-                        class="text-xs text-rose-400 hover:text-rose-300 hover:bg-rose-950/40 p-1.5 rounded-lg transition"
-                        title="Hapus pencapaian"
-                      >
-                        <Trash2 class="w-4 h-4" />
-                      </button>
+                  <div
+                    role="listitem"
+                    class="bg-slate-900/60 border rounded-xl p-5 space-y-4 transition-all duration-150 {draggedAchIndex === idx ? 'opacity-40 border-dashed border-emerald-500/80 scale-[0.99]' : dragOverAchIndex === idx ? 'border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.25)] bg-slate-800/80' : 'border-slate-800'}"
+                    ondragover={(e) => handleAchDragOver(e, idx)}
+                    ondragleave={handleAchDragLeave}
+                    ondrop={(e) => handleAchDrop(e, idx)}
+                  >
+                    <div
+                      role="toolbar"
+                      tabindex="0"
+                      class="flex items-center justify-between pb-3 border-b border-slate-800/60 cursor-grab active:cursor-grabbing select-none"
+                      draggable="true"
+                      ondragstart={(e) => handleAchDragStart(e, idx)}
+                      ondragend={handleAchDragEnd}
+                      title="Klik & seret untuk memindahkan urutan posisi prestasi"
+                    >
+                      <div class="flex items-center gap-2">
+                        <div class="text-slate-500 hover:text-emerald-400 p-1 rounded transition" title="Seret untuk memindahkan urutan">
+                          <GripVertical class="w-4 h-4" />
+                        </div>
+
+                        <div class="flex items-center gap-0.5">
+                          <button
+                            type="button"
+                            onclick={(e) => { e.stopPropagation(); moveAchievement(idx, idx - 1); }}
+                            disabled={idx === 0}
+                            class="p-1 rounded text-slate-500 hover:text-white disabled:opacity-20 disabled:hover:text-slate-500 transition cursor-pointer"
+                            title="Pindah ke atas"
+                          >
+                            <ArrowUp class="w-3.5 h-3.5" />
+                          </button>
+                          <button
+                            type="button"
+                            onclick={(e) => { e.stopPropagation(); moveAchievement(idx, idx + 1); }}
+                            disabled={idx === content.achievements.length - 1}
+                            class="p-1 rounded text-slate-500 hover:text-white disabled:opacity-20 disabled:hover:text-slate-500 transition cursor-pointer"
+                            title="Pindah ke bawah"
+                          >
+                            <ArrowDown class="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+
+                        <span class="text-xs font-mono text-yellow-400 font-semibold ml-1">
+                          #{idx + 1} — {ach.title || 'Tanpa Judul'}
+                        </span>
+                      </div>
+
+                      <div class="flex items-center gap-2">
+                        <span class="text-[10px] text-slate-500 font-mono hidden sm:inline-block">
+                          Tarik bar ini untuk geser posisi
+                        </span>
+                        <button
+                          type="button"
+                          onclick={(e) => { e.stopPropagation(); removeAchievement(ach.id); }}
+                          class="text-xs text-rose-400 hover:text-rose-300 hover:bg-rose-950/40 p-1.5 rounded-lg transition"
+                          title="Hapus pencapaian"
+                        >
+                          <Trash2 class="w-4 h-4" />
+                        </button>
+                      </div>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
