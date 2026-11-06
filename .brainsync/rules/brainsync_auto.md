@@ -1,7 +1,7 @@
 
 
 # Project Memory — porto-vol-2
-> 27 notes | Score threshold: >40
+> 30 notes | Score threshold: >40
 
 ## Safety — Never Run Destructive Commands
 
@@ -20,6 +20,7 @@
 
 ## 📝 NOTE: 1 uncommitted file(s) in working tree.\n\n## Project Standards
 
+- 12 potentially unused files detected — confirmed 3x
 - convention in .gitignore
 - Version your API from day 1 (/api/v1/)
 - Use consistent response format across all endpoints
@@ -27,7 +28,6 @@
 - Handle timezone correctly — store UTC, display in user's timezone
 - Make layouts responsive from the start — mobile-first approach
 - Disable submit button during form submission — prevent double-submit
-- Always add empty states ("No items yet" with call-to-action)
 
 ## Verified Best Practices
 

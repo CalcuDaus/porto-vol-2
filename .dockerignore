@@ -1,0 +1,15 @@
+node_modules
+.svelte-kit
+build
+dist
+.git
+.vscode
+.agents
+.brainsync
+scratch
+psd
+*.psd
+*.log
+.env
+.env.local
+
