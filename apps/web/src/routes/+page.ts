@@ -15,3 +15,4 @@ export const load: PageLoad = async ({ fetch }) => {
   }
   return { content: defaultContent };
 };
+
