@@ -1,167 +1,179 @@
 import type { SiteContent } from '../types';
 
 export const defaultContent: SiteContent = {
-  appearance: {
-    titleFont: 'cabin-sketch',
-    navFont: 'cabin-sketch',
-    bodyFont: 'kalam',
-    chalkColor: '#ebebeb',
-    zoomDuration: 700
+  "appearance": {
+    "titleFont": "cabin-sketch",
+    "navFont": "cabin-sketch",
+    "bodyFont": "kalam",
+    "chalkColor": "#ebebeb",
+    "zoomDuration": 700
   },
-  hero: {
-    name: 'MHD FIRDAUS',
-    role: 'Software Engineer',
-    avatarUrl: '/board/avatar.webp',
-    showAvatar: true,
-    avatarSize: 160,
-    avatarOffsetX: -6,
-    avatarOffsetY: 10,
-    cvUrl: '/cv.pdf',
-    cvLabel: 'Curriculum Vitae',
-    showCv: true
+  "hero": {
+    "name": "MHD FIRDAUS",
+    "role": "Software Engineer",
+    "avatarUrl": "/board/avatar.webp",
+    "showAvatar": true,
+    "avatarSize": 160,
+    "avatarOffsetX": -6,
+    "avatarOffsetY": 10,
+    "cvUrl": "/cv.pdf",
+    "cvLabel": "Curriculum Vitae",
+    "showCv": true
   },
-  nav: {
-    projects: 'Projects',
-    achievements: 'Achivements',
-    skills: 'Skills',
-    contact: 'Contact'
+  "nav": {
+    "projects": "Projects",
+    "achievements": "Achivements",
+    "skills": "Skills",
+    "contact": "Contact"
   },
-  socials: {
-    github: 'https://github.com/calcudaus',
-    linkedin: 'https://www.linkedin.com/in/mhd-firdaus/',
-    instagram: 'https://instagram.com/e.about.us'
+  "socials": {
+    "github": "https://github.com/calcudaus",
+    "linkedin": "https://www.linkedin.com/in/mhd-firdaus/",
+    "instagram": "https://instagram.com/e.about.us"
   },
-  mathRain: {
-    enabled: true,
-    density: 100,
-    size: 20,
-    opacity: 0.45,
-    speed: 1,
-    color: '#ffffff',
-    bounce: true
+  "mathRain": {
+    "enabled": true,
+    "density": 100,
+    "size": 20,
+    "opacity": 0.45,
+    "speed": 1,
+    "color": "#ffffff",
+    "bounce": true
   },
-  intros: {
-    projects: 'Selected software engineering works, open-source projects, and systems.',
-    achievements: 'Milestones, certifications, and recognitions earned along the journey.',
-    skills: 'Core technical competencies, frameworks, runtimes, and engineering tooling.'
+  "intros": {
+    "projects": "Selected software engineering works, open-source projects, and systems.",
+    "achievements": "Milestones, certifications, and recognitions earned along the journey.",
+    "skills": "Core technical competencies, frameworks, runtimes, and engineering tooling."
   },
-  projects: [
+  "projects": [
     {
-      id: 'proj-1',
-      title: 'Bun + Elysia API Gateway',
-      description: 'Ultra-fast REST API service built on Bun runtime featuring ElysiaJS, Supabase integration, and Swagger OpenAPI documentation.',
-      tags: ['Bun', 'ElysiaJS', 'TypeScript', 'Supabase'],
-      year: '2025',
-      repoUrl: 'https://github.com',
-      liveUrl: 'http://localhost:3001/swagger',
-      isDeleted: false
+      "id": "proj-1",
+      "title": "Bun + Elysia API Gateway",
+      "description": "Ultra-fast REST API service built on Bun runtime featuring ElysiaJS, Supabase integration, and Swagger OpenAPI documentation.",
+      "tags": [
+        "Bun",
+        "ElysiaJS",
+        "TypeScript",
+        "Supabase"
+      ],
+      "year": "2025",
+      "repoUrl": "https://github.com",
+      "liveUrl": "http://localhost:3001/swagger",
+      "isDeleted": false
     },
     {
-      id: 'proj-2',
-      title: 'Svelte 5 Reactive Showcase',
-      description: 'Modern, ultra-performant client application utilizing Svelte 5 Runes ($state, $derived) and Tailwind CSS styling.',
-      tags: ['Svelte 5', 'SvelteKit', 'TailwindCSS', 'TypeScript'],
-      year: '2025',
-      repoUrl: 'https://github.com',
-      liveUrl: 'http://localhost:5173',
-      isDeleted: false
+      "id": "proj-2",
+      "title": "Svelte 5 Reactive Showcase",
+      "description": "Modern, ultra-performant client application utilizing Svelte 5 Runes ($state, $derived) and Tailwind CSS styling.",
+      "tags": [
+        "Svelte 5",
+        "SvelteKit",
+        "TailwindCSS",
+        "TypeScript"
+      ],
+      "year": "2025",
+      "repoUrl": "https://github.com",
+      "liveUrl": "http://localhost:5173",
+      "isDeleted": false
     },
     {
-      id: 'proj-3',
-      title: 'Supabase Realtime Database Store',
-      description: 'PostgreSQL-backed data layer with Row Level Security (RLS), instant REST API, and realtime subscriptions.',
-      tags: ['Supabase', 'PostgreSQL', 'Auth', 'Storage'],
-      year: '2024',
-      repoUrl: 'https://github.com',
-      liveUrl: 'https://supabase.com',
-      isDeleted: false
+      "id": "proj-3",
+      "title": "Supabase Realtime Database Store",
+      "description": "PostgreSQL-backed data layer with Row Level Security (RLS), instant REST API, and realtime subscriptions.",
+      "tags": [
+        "Supabase",
+        "PostgreSQL",
+        "Auth",
+        "Storage"
+      ],
+      "year": "2024",
+      "repoUrl": "https://github.com",
+      "liveUrl": "https://supabase.com",
+      "isDeleted": false
     }
   ],
-  achievements: [
+  "achievements": [
     {
-      id: 'ach-1',
-      title: 'Full-Stack Software Engineering Excellence',
-      issuer: 'Technical Certification',
-      year: '2025',
-      description: 'Mastery in building modern reactive applications using Svelte, Bun, TypeScript, and microservice APIs.',
-      isDeleted: false
+      "id": "ach-1",
+      "title": "Full-Stack Software Engineering Excellence",
+      "issuer": "Technical Certification",
+      "year": "2025",
+      "description": "Mastery in building modern reactive applications using Svelte, Bun, TypeScript, and microservice APIs.",
+      "isDeleted": false
     },
     {
-      id: 'ach-2',
-      title: 'High-Performance Web Architecture',
-      issuer: 'Open Source Community',
-      year: '2025',
-      description: 'Engineered sub-millisecond REST APIs with Bun runtime and ElysiaJS with type-safe schema validation.',
-      isDeleted: false
+      "id": "ach-2",
+      "title": "High-Performance Web Architecture",
+      "issuer": "Open Source Community",
+      "year": "2025",
+      "description": "Engineered sub-millisecond REST APIs with Bun runtime and ElysiaJS with type-safe schema validation.",
+      "isDeleted": false
     },
     {
-      id: 'ach-3',
-      title: 'Database & Realtime Systems',
-      issuer: 'PostgreSQL / Supabase',
-      year: '2024',
-      description: 'Implemented Row Level Security (RLS), ACID-compliant schemas, and automated backup strategies.',
-      isDeleted: false
+      "id": "ach-3",
+      "title": "1st Winner in Web Technologies",
+      "issuer": "Puspernas",
+      "year": "2023",
+      "description": "Create a Full Stack App with Native PHP, Mysql, HTML, and CSS ",
+      "isDeleted": false
     }
   ],
-  skills: [
+  "skills": [
     {
-      id: 'grp-1',
-      category: 'Languages & Runtime',
-      items: [
-        'TypeScript',
-        'JavaScript (ESNext)',
-        'Bun Runtime',
-        'HTML5 / Modern CSS',
-        'SQL (PostgreSQL)'
+      "id": "grp-1",
+      "category": "Languages & Runtime",
+      "items": [
+        "TypeScript",
+        "JavaScript (ESNext)",
+        "Bun Runtime",
+        "HTML5 / Modern CSS",
+        "SQL (PostgreSQL)"
       ],
-      isDeleted: false
+      "isDeleted": false
     },
     {
-      id: 'grp-2',
-      category: 'Frontend Engineering',
-      items: [
-        'Svelte 5 (Runes)',
-        'SvelteKit',
-        'Tailwind CSS v4',
-        'Vite',
-        'Responsive Design',
-        'Web Performance'
+      "id": "grp-2",
+      "category": "Frontend Engineering",
+      "items": [
+        "Svelte 5 (Runes)",
+        "SvelteKit",
+        "Tailwind CSS v4",
+        "Vite",
+        "Responsive Design",
+        "Web Performance"
       ],
-      isDeleted: false
+      "isDeleted": false
     },
     {
-      id: 'grp-3',
-      category: 'Backend & APIs',
-      items: [
-        'ElysiaJS',
-        'REST APIs (/api/v1/)',
-        'OpenAPI / Swagger',
-        'TypeBox Validation',
-        'Eden Treaty'
+      "id": "grp-3",
+      "category": "Backend & APIs",
+      "items": [
+        "ElysiaJS",
+        "REST APIs (/api/v1/)",
+        "OpenAPI / Swagger",
+        "TypeBox Validation",
+        "Eden Treaty"
       ],
-      isDeleted: false
+      "isDeleted": false
     },
     {
-      id: 'grp-4',
-      category: 'Database & Cloud',
-      items: [
-        'Supabase',
-        'PostgreSQL',
-        'Row Level Security (RLS)',
-        'Supabase Auth',
-        'Git / GitHub'
+      "id": "grp-4",
+      "category": "Database & Cloud",
+      "items": [
+        "Supabase",
+        "PostgreSQL",
+        "Row Level Security (RLS)",
+        "Supabase Auth",
+        "Git / GitHub"
       ],
-      isDeleted: false
+      "isDeleted": false
     }
   ],
-  contact: {
-    heading: 'Get in Touch',
-    description: 'Feel free to reach out for collaborations, questions, or project inquiries.',
-    email: 'mhdfirdaus@example.com',
-    formEnabled: true
+  "contact": {
+    "heading": "Get in Touch",
+    "description": "Feel free to reach out for collaborations, questions, or project inquiries.",
+    "email": "mhdfirdaus@example.com",
+    "formEnabled": true
   },
-  updatedAt: new Date().toISOString()
+  "updatedAt": "2026-11-06T16:14:58.830Z"
 };
-
-export default defaultContent;
-

@@ -11,7 +11,8 @@
     "dev:web": "bun --filter web dev",
     "dev:admin": "bun --filter admin dev",
     "dev:api": "bun --filter api dev",
-    "build": "bun run optimize:images && bun --filter \"*\" build",
+    "build": "bun run sync:content && bun run optimize:images && bun --filter \"*\" build",
+    "sync:content": "bun scripts/sync-content.ts",
     "optimize:images": "bun scripts/convert-webp.ts",
     "check": "bun --filter web check && bun --filter admin check"
   },
