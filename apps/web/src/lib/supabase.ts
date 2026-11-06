@@ -10,8 +10,12 @@ const getEnv = (key: string): string => {
   return '';
 };
 
-const supabaseUrl = getEnv('PUBLIC_SUPABASE_URL');
-const supabaseAnonKey = getEnv('PUBLIC_SUPABASE_ANON_KEY');
+const supabaseUrl = getEnv('PUBLIC_SUPABASE_URL') || getEnv('SUPABASE_URL');
+const supabaseAnonKey =
+  getEnv('PUBLIC_SUPABASE_ANON_KEY') ||
+  getEnv('PUBLIC_SUPABASE_PUBLISHABLE_KEY') ||
+  getEnv('SUPABASE_ANON_KEY') ||
+  getEnv('SUPABASE_PUBLISHABLE_KEY');
 
 export const isSupabaseConfigured = Boolean(
   supabaseUrl && 
