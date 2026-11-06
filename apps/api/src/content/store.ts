@@ -203,6 +203,8 @@ export function saveContent(content: SiteContent): void {
     }).then(({ error }) => {
       if (error) {
         console.warn('[Store] Supabase sync warning:', error.message);
+      } else {
+        console.log('☁️ [Store] Supabase cloud synchronized successfully at', inMemoryContent.updatedAt);
       }
     });
   }

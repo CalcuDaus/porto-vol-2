@@ -94,11 +94,11 @@ export const defaultContent: SiteContent = {
   ],
   "achievements": [
     {
-      "id": "ach-1",
-      "title": "Full-Stack Software Engineering Excellence",
-      "issuer": "Technical Certification",
-      "year": "2025",
-      "description": "Mastery in building modern reactive applications using Svelte, Bun, TypeScript, and microservice APIs.",
+      "id": "ach-3",
+      "title": "1st Winner in Web Technologies",
+      "issuer": "Puspernas",
+      "year": "2023",
+      "description": "Create a Full Stack App with Native PHP, Mysql, HTML, and CSS ",
       "isDeleted": false
     },
     {
@@ -110,11 +110,11 @@ export const defaultContent: SiteContent = {
       "isDeleted": false
     },
     {
-      "id": "ach-3",
-      "title": "1st Winner in Web Technologies",
-      "issuer": "Puspernas",
-      "year": "2023",
-      "description": "Create a Full Stack App with Native PHP, Mysql, HTML, and CSS ",
+      "id": "ach-1",
+      "title": "Full-Stack Software Engineering Excellence",
+      "issuer": "Technical Certification",
+      "year": "2025",
+      "description": "Mastery in building modern reactive applications using Svelte, Bun, TypeScript, and microservice APIs.",
       "isDeleted": false
     }
   ],
@@ -175,5 +175,5 @@ export const defaultContent: SiteContent = {
     "email": "mhdfirdaus.business@gmail.com",
     "formEnabled": true
   },
-  "updatedAt": "2026-11-06T17:08:25.212Z"
+  "updatedAt": "2026-11-06T17:13:31.800Z"
 };

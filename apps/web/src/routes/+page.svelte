@@ -20,10 +20,21 @@
     isSoundMuted
   } from '#lib/audio/chalkAudio';
 
+  // SvelteKit Page props
+  let { data } = $props();
+
   // Site content state
   let content = $state<SiteContent | null>(null);
   let isLoading = $state<boolean>(true);
   let isSoundActive = $state<boolean>(true);
+
+  $effect(() => {
+    if (data?.content) {
+      content = data.content;
+      isLoading = false;
+      updateConsoleData(data.content);
+    }
+  });
 
   // Zoom animation & active view
   type SectionType = 'projects' | 'achievements' | 'skills' | 'contact';
